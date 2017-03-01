@@ -1,5 +1,7 @@
 package com.arun;
 
+import com.arun.model.HbUsersEntity;
+import com.arun.model.UserDataAccess;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.TextField;
@@ -15,6 +17,14 @@ public class HomePage extends WebPage {
    // PasswordTextField passwordField;
    // Label errorLabel;
     Model<String> strMdl = Model.of(" ");
+//    SignInSession session = getMySession();
+//
+//    /**
+//     * @return Session
+//     */
+//    private SignInSession getMySession() {
+//        return (SignInSession)getSession();
+//    }
 
     HomePage homePage = this;
 
@@ -32,7 +42,12 @@ public class HomePage extends WebPage {
 
         add(new SignInForm("signInForm"));
 
-        //add(LoginUserLink("signIn"));
+        //Check if there already is a session:
+//        if (session.isSignedIn()) {
+//            // set feedback message and go to HomePage:
+//            getSession().info("Welcome back '"+session.getUser().getUsername()+"'!");
+//            setResponsePage(new HomePage());
+//        }
 
 
         //add(new Label("version", getApplication().getFrameworkSettings().getVersion()));
@@ -92,21 +107,24 @@ public class HomePage extends WebPage {
          */
         @Override
         public final void onSubmit() {
-            strMdl.setObject("Username: "+usernameField.getModelObject()+" password: "+passwordField.getModelObject());
-            add(errorLabel);
-
+//           strMdl.setObject("Username: "+usernameField.getModelObject()+" password: "+passwordField.getModelObject());
+//            add(errorLabel);
+            UserDataAccess userDataAccess = new UserDataAccess();
+            HbUsersEntity user = userDataAccess.getUserByUsername(usernameField.getModelObject());
             // Sign the user in
-//            if (session.signIn(usernameField.getModelObject(), passwordField.getModelObject())) {
-//                getSession().info("Welcome '"+usernameField.getModelObject()+"'!");
-//                setResponsePage(new HomePage());
-//            }
-//            else {
-//                // Get the error message from the properties file associated with the Component
-//                String errmsg = getString("loginError", null, "Login failed!");
-//
-//                // Register the error message with the feedback panel
-//                error(errmsg);
-//            }
+            if (user != null && user.getUserpass().equals(passwordField.getModelObject())) {
+
+                strMdl.setObject("Welcome '"+usernameField.getModelObject()+"'!");
+                add(errorLabel);
+                //setResponsePage(new HomePage());
+            }
+            else {
+                // Get the error message from the properties file associated with the Component
+                strMdl.setObject("Login failed!");
+
+                // Register the error message with the feedback panel
+                add(errorLabel);
+            }
         }
 
     }
