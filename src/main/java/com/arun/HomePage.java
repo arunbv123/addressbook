@@ -1,5 +1,6 @@
 package com.arun;
 
+import com.arun.contacts.ContactPage;
 import com.arun.model.HbUsersEntity;
 import com.arun.model.UserDataAccess;
 import org.apache.wicket.markup.html.form.Form;
@@ -116,7 +117,7 @@ public class HomePage extends WebPage {
 
                 strMdl.setObject("Welcome '"+usernameField.getModelObject()+"'!");
                 add(errorLabel);
-                //setResponsePage(new HomePage());
+                setResponsePage(new ContactPage(user.getIduser()));
             }
             else {
                 // Get the error message from the properties file associated with the Component
