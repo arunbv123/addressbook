@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Address Book</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+
+    <link href="font/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="css/animatecss/animate.min.css"/>
+    <!-- SLIDENAV -->
+    <link rel="stylesheet" type="text/css" href="animatecss/slidernav.css"/>
+    <!-- FONTS -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+    <style type="text/css">
+        .box.border.green {
+            border: 1px solid #9db36a;
+        }
+
+        .contact{
+            width: 100%;
+            height: 100%;
+
+        }
+
+        .labelError {
+            color: red;
+            font:600 16px/18px 'Roboto',sans-serif;
+
+
+        }
+
+        .btImg{
+            width: 56px;
+            height: 56px;
+
+        }
+
+        .box.border.green > .box-title {
+            color: #FFFFFF !important;
+            background-color: #a8bc7b;
+            border-bottom: 1px solid #9db36a;
+        }
+
+        .box.border > .box-title, .box.solid > .box-title {
+            padding: 8px 10px 2px;
+            border-bottom: 1px solid #c4c4c4;
+            min-height: 30px;
+            background-color: #dbdbdb;
+            border-radius: 4px 4px 0 0;
+            margin-bottom: 0;
+        }
+
+        .box .box-title {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #c4c4c4;
+            min-height: 30px;
+        }
+
+        .box.border .box-body, .box.solid .box-body {
+            border-radius: 0 0 4px 4px;
+            padding: 10px;
+            background-color: #FFFFFF;
+        }
+
+        .box.border, .box.solid {
+            border: 1px solid #c4c4c4;
+            border-radius: 4px;
+        }
+
+        .box {
+            clear: both;
+            margin-top: 0px;
+            margin-bottom: 25px;
+            padding: 0px;
+        }
+
+        * {
+            outline: medium none !important;
+        }
+
+        *, *::before, *::after {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+
+<!--/HEADER -->
+
+<!-- PAGE -->
+<section id="page">
+    <!-- SIDEBAR -->
+    <!-- /SIDEBAR -->
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12">
+                <!-- BOX -->
+                <div class="box border green">
+                    <div class="box-title">
+                        <h4><i class="fa fa-book"></i>Address Book</h4>
+
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div id="address-book">
+
+
+                                    <form wicket:id="addressNameList" class="slider-content">
+                                        <input type="image" src="images/add.png" name="add" class="btImg" wicket:id="addImg" />
+                                        <ul>
+                                            <li wicket:id="namelistItems"></li>
+                                        </ul>
+                                    </form>
+
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+
+                                <form wicket:id="contactDetails" class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h2 class="panel-title"><span wicket:id="contactNameHeading">John Doe</span></h2>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div id="card" class="row">
+                                            <div class="col-md-6">
+                                                <table class="table table-hover">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td><i class="fa fa-font"></i> Name</td>
+                                                        <td id="card-name"><input wicket:id="contactName" class= "contact" type="text" name="fname"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><i class="fa fa-home"></i> Address</td>
+                                                        <td><textarea wicket:id="contactAddress" class= "contact" name="Text1" rows="3"></textarea>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><i class="fa fa-phone"></i> Phone</td>
+                                                        <td><input wicket:id="contactPhone" class= "contact" type="text" name="phone"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><i class="fa fa-envelope"></i> Email</td>
+                                                        <td><input wicket:id="contactEmail" class= "contact" type="text" name="email"></td>
+                                                    </tr>
+
+                                                    </tbody>
+                                                </table>
+                                                <label wicket:id="contactError" class="labelError"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Error</label>
+                                            </div>
+                                        </div>
+                                        <div align="right">
+
+                                            <input type="image" src="images/edit.png" name="edit" class="btImg" wicket:id="editImg" />
+                                            <input type="image" src="images/delete.png" name="delete" class="btImg" wicket:id="deleteImg" />
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /BOX -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--/PAGE -->
+<!-- JAVASCRIPTS -->
+<!-- Placed at the end of the document so the pages load faster -->
+<!-- JQUERY -->
+<script src="js/jquery/jquery-2.0.3.min.js"></script>
+<!-- JQUERY UI-->
+<!-- BOOTSTRAP -->
+<script src="js/bootstrap.min.js"></script>
+<!-- SLIDENAV -->
+<script type="text/javascript" src="js/slidernav/slidernav.js"></script>
+
+
+<!--<script>-->
+<!--jQuery(document).ready(function() {-->
+<!--handleSliderNav();-->
+
+<!--});-->
+<!--var handleSliderNav = function () {-->
+<!--$('#address-book').sliderNav();-->
+
+<!--$('#address-book .slider-content ul li ul li a').click(function(e){-->
+<!--e.preventDefault();-->
+<!--var contact_card = $('#contact-card');-->
+<!--//Get the name clicked on-->
+<!--var name = $(this).text();-->
+<!--//Set the name-->
+<!--$('#contact-card .panel-title').html(name);-->
+<!--$('#contact-card #card-name').html(name);-->
+<!--//Randomize the image-->
+<!--var img_id = Math.floor(Math.random() * (5 - 1 + 1)) + 1;-->
+<!--//Set the image-->
+<!--$('#contact-card .headshot img').attr('src', 'img/addressbook/'+img_id+'.jpg');-->
+<!--contact_card.removeClass('animated fadeInUp').addClass('animated fadeInUp');-->
+<!--var wait = window.setTimeout( function(){-->
+<!--contact_card.removeClass('animated fadeInUp')},-->
+<!--1300-->
+<!--);-->
+<!--});-->
+<!--}-->
+<!--</script>-->
+<!-- /JAVASCRIPTS -->
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.arun.model.HbContactsEntity" table="contacts" schema="AddressBook">
+        <id name="idcontact">
+            <column name="idcontact" sql-type="int(11)"/>
+        </id>
+        <property name="iduser">
+            <column name="iduser" sql-type="int(11)"/>
+        </property>
+        <property name="contactName">
+            <column name="contact_name" sql-type="text" not-null="true"/>
+        </property>
+        <property name="contactEmail">
+            <column name="contact_email" sql-type="text" not-null="true"/>
+        </property>
+        <property name="contactPhone">
+            <column name="contact_phone" sql-type="varchar(20)" length="20" not-null="true"/>
+        </property>
+        <property name="contactAddress">
+            <column name="contact_address" sql-type="text" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

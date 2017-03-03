@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.url">jdbc:mysql://107.170.212.195:3306/AddressBook</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">RootdB!234</property>
+        <!--create the database schema on startup if required -->
+        <property name="hbm2ddl.auto">update</property>
+        <!-- Enable Hibernate's automatic session context management -->
+        <property name="current_session_context_class">thread</property>
+        <mapping resource="model/HbContactsEntity.hbm.xml"/>
+        <mapping class="com.arun.model.HbContactsEntity"/>
+        <mapping resource="model/HbUsersEntity.hbm.xml"/>
+        <mapping class="com.arun.model.HbUsersEntity"/>
+
+
+        <!-- DB schema will be updated if needed -->
+        <!-- <property name="hbm2ddl.auto">update</property> -->
+    </session-factory>
+</hibernate-configuration>
