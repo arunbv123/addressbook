@@ -12,6 +12,7 @@ import java.io.Serializable;
 public class HbUsersEntity {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int iduser;
+
     private String username;
     private String userpass;
     private String useremail;
@@ -27,7 +28,7 @@ public class HbUsersEntity {
     }
 
     @javax.persistence.Basic
-    @javax.persistence.Column(name = "username", nullable = false, length = -1)
+    @javax.persistence.Column(name = "username", nullable = false, length = -1, unique = true)
     public String getUsername() {
         return username;
     }

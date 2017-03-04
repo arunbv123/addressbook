@@ -384,6 +384,7 @@ public class ContactPage extends WebPage {
             emailModel.setObject("");
             emailField.setEnabled(true);
             contactDetailsForm.add(emailField);
+
             save = true;
             contactFilled = true;
             showContactID = -1;
@@ -415,13 +416,19 @@ public class ContactPage extends WebPage {
             contactDetailsForm.replace(nameHeadingField);
 
             nameModel.setObject(""+contactName);
+            nameField.setEnabled(false);
             contactDetailsForm.replace(nameField);
             addressModel.setObject(""+contactAddress);
+            addressField.setEnabled(false);
             contactDetailsForm. add(addressField);
             phoneModel.setObject(""+contactPh);
+            phoneField.setEnabled(false);
             contactDetailsForm.add(phoneField);
             emailModel.setObject(""+contactEmail);
+            emailField.setEnabled(false);
             contactDetailsForm.add(emailField);
+            editModel.setObject(editRef);
+            contactDetailsForm.add(editImage);
             contactFilled = true;
             showContactID = contactId;
         }

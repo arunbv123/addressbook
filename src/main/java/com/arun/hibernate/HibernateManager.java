@@ -89,24 +89,24 @@ public class HibernateManager {
 
     public static boolean update(Object object) {
 
-        final Session session = HibernateManager.getSessionFactory().openSession();
-        Transaction transaction = null;
+            final Session session = HibernateManager.getSessionFactory().openSession();
+            Transaction transaction = null;
 
-        try {
-            transaction = session.beginTransaction();
+            try {
+                transaction = session.beginTransaction();
 
-            session.saveOrUpdate(object);
-            transaction.commit();
-            return true;
-        } catch (HibernateException e) {
-            if (null != transaction) {
-                transaction.rollback();
+                session.saveOrUpdate(object);
+                transaction.commit();
+                return true;
+            } catch (HibernateException e) {
+                if (null != transaction) {
+                    transaction.rollback();
+                }
+                e.printStackTrace(); // todo: log to file instead
+                return false;
+            } finally {
+                session.close();
             }
-            e.printStackTrace(); // todo: log to file instead
-            return false;
-        } finally {
-            session.close();
-        }
     }
 
     public static boolean deleteContact(int id)
@@ -131,10 +131,28 @@ public class HibernateManager {
         } finally {
             session.close();
         }
+    }
 
+    public static boolean createUser (Object object) {
 
+        final Session session = HibernateManager.getSessionFactory().openSession();
+        Transaction transaction = null;
 
+        try {
+            transaction = session.beginTransaction();
 
+            session.save(object);
+            transaction.commit();
+            return true;
+        } catch (HibernateException e) {
+            if (null != transaction) {
+                transaction.rollback();
+            }
+            e.printStackTrace(); // todo: log to file instead
+            return false;
+        } finally {
+            session.close();
+        }
     }
 
 

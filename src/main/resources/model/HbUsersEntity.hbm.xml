@@ -9,7 +9,7 @@
             <column name="iduser" sql-type="int(11)"/>
         </id>
         <property name="username">
-            <column name="username" sql-type="text"/>
+            <column name="username" sql-type="varchar(50)" unique="true"/>
         </property>
         <property name="userpass">
             <column name="userpass" sql-type="text"/>
