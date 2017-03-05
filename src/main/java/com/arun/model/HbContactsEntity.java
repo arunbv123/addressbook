@@ -5,6 +5,7 @@ import javax.persistence.GenerationType;
 import java.io.Serializable;
 
 /**
+ * Hibernate Entity for contact table in database. This has the information regarding the addressbook contacts in the database
  * Created by Arun on 2/27/2017.
  */
 @javax.persistence.Entity

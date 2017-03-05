@@ -5,112 +5,107 @@ import com.arun.ValidateString;
 import com.arun.hibernate.HibernateManager;
 import com.arun.model.ContactDataAccess;
 import com.arun.model.HbContactsEntity;
-import com.arun.model.HbUsersEntity;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.ImageButton;
 import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.form.TextField;
-import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.link.ILinkListener;
 import org.apache.wicket.markup.html.link.Link;
-import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.repeater.RepeatingView;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
-import org.apache.wicket.request.UrlUtils;
-import org.apache.wicket.request.resource.ContextRelativeResource;
 import org.apache.wicket.request.resource.PackageResourceReference;
-import org.apache.wicket.request.resource.ResourceReference;
 import org.jboss.logging.Logger;
 
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 /**
+ * The page that renders address book page with contacts listed.
  * Created by Arun on 3/1/2017.
  */
 public class ContactPage extends WebPage {
 
     private static final Logger LOGGER = Logger.getLogger(ContactPage.class);
 
+    /**
+     * The reference for the images
+     */
+    private PackageResourceReference editRef = new PackageResourceReference(ContactPage.class, "edit.png");
+    private PackageResourceReference deleteRef = new PackageResourceReference(ContactPage.class, "delete.png");
+    private PackageResourceReference saveRef = new PackageResourceReference(ContactPage.class, "save.png");
+    private PackageResourceReference addRef = new PackageResourceReference(ContactPage.class, "add.png");
+    private PackageResourceReference signoutRef = new PackageResourceReference(ContactPage.class, "signout.png");
 
-    private PackageResourceReference editRef = new PackageResourceReference(ContactPage.class,"edit.png");
-    private PackageResourceReference deleteRef = new PackageResourceReference(ContactPage.class,"delete.png");
-    private PackageResourceReference saveRef = new PackageResourceReference(ContactPage.class,"save.png");
-    private PackageResourceReference addRef = new PackageResourceReference(ContactPage.class,"add.png");
-    private PackageResourceReference signoutRef = new PackageResourceReference(ContactPage.class,"signout.png");
+    /**
+     * Models for the components in webpage used to dynamically update the component elements example: update text for TextFields and Update images in ImageButton
+     */
+    private Model<String> nameModel = Model.of(" ");
+    private Model<String> addressModel = Model.of(" ");
+    private Model<String> phoneModel = Model.of(" ");
+    private Model<String> emailModel = Model.of(" ");
+    private Model<String> nameHeadingModel = Model.of(" ");
+    private Model<String> contactErrorModel = Model.of("Error");
+    private Model editModel = Model.of(editRef);
+    private Model deleteModel = Model.of(deleteRef);
+    private Model addModel = Model.of(addRef);
+    private Model signoutModel = Model.of(signoutRef);
 
-    Model<String> nameModel = Model.of(" ");
-    Model<String> addressModel = Model.of(" ");
-    Model<String> phoneModel = Model.of(" ");
-    Model<String> emailModel = Model.of(" ");
-    Model<String> nameHeadingModel = Model.of(" ");
-    Model<String> contactErrorModel = Model.of("Error");
-    Model editModel = Model.of(editRef);
-    Model deleteModel = Model.of(deleteRef);
-    Model addModel = Model.of(addRef);
-    Model signoutModel = Model.of(signoutRef);
+    /**
+     * Components of the webpage
+     */
+    private TextField<String> nameField;
+    private TextField<String> phoneField;
+    private TextField<String> emailField;
+    private TextArea<String> addressField;
+    private Label nameHeadingField;
+    private Label contactError;
 
-    TextField<String> nameField;
-    TextField<String> phoneField;
-    TextField<String> emailField;
-    TextArea<String>  addressField;
-    Label nameHeadingField;
-    Label contactError;
+    private ImageButton editImage;
+    private ImageButton signoutImage;
+    private ImageButton deleteImage;
+    private ImageButton addImage;
 
-    ImageButton editImage;
-    ImageButton signoutImage;
-    ImageButton deleteImage;
-    ImageButton addImage;
+    private ContactDetailsForm contactDetailsForm;
 
-    ContactDetailsForm contactDetailsForm;
-    //ContactDataAccess contactDataAccess;
 
-    int userId = -1;
-    int showContactID = -1;
+    /**
+     * Flags to keep track of the page status
+     */
 
     boolean contactFilled = false;
     boolean save = false;
 
+    /**
+     * User id and contact id to manipulate database when required
+     */
+    int userId = -1;
+    int showContactID = -1;
 
 
     public ContactPage(int userid) {
-        //add(new Label("helloMessage", "Hello WicketWorld!"));
+
         userId = userid;
-        //contactDataAccess = new ContactDataAccess();
         contactDetailsForm = new ContactDetailsForm("contactDetails");
         add(contactDetailsForm);
         add(new AddressNameListForm("addressNameList", userid));
 
         Link<Void> signoutLink = signoutLink("signOutLink");
-        signoutImage = new SignOutImageButton("signoutImg",signoutModel);
-        //  add(editLink("editLink").add(editImage));
+        signoutImage = new SignOutImageButton("signoutImg", signoutModel);
+
         signoutImage.setDefaultFormProcessing(false);
 
         signoutLink.add(signoutImage);
         add(signoutLink);
-        // create a list with sublists
-//        List<Object> l1 = new ArrayList<>();
-//        l1.add("test 1.1");
-//        l1.add("test 1.2");
-//        List<Object> l2 = new ArrayList<>();
-//        l2.add("test 2.1");
-//        l2.add("test 2.2");
-//        l2.add("test 2.3");
-//        l2.add("test 2.4");
-//        l1.add(l2);
-//        l1.add("test 1.3");
-//
-//        // construct the panel
-//        add(new RecursivePanel("addressNameList", l1));
+
     }
 
-
+    /**
+     * Form that list all the contacts in the AddressBook for the signed in user
+     */
     public final class AddressNameListForm extends Form<Void> {
 
         public AddressNameListForm(String id, int userid) {
@@ -126,10 +121,9 @@ public class ContactPage extends WebPage {
             if (contactList != null && !contactList.isEmpty()) {
 
 
-
                 for (HbContactsEntity contact : contactList) {
 
-                    //ContactLink contactLink = new ContactLink();
+
                     namelistItems.add(new ContactLink(namelistItems.newChildId(), contact.getContactName(), new OnContactClicked(contact)));
 
                     if (!contactFilled) {
@@ -151,7 +145,7 @@ public class ContactPage extends WebPage {
                 }
 
 
-            }else{
+            } else {
                 nameHeadingModel.setObject("No Contacts available, Add new contact below");
                 contactDetailsForm.add(nameHeadingField);
                 editModel.setObject(saveRef);
@@ -174,14 +168,16 @@ public class ContactPage extends WebPage {
 
     }
 
+    /**
+     * Form that displays the Contact details of the contact selected
+     */
     public final class ContactDetailsForm extends Form<Void> {
-
 
 
         public ContactDetailsForm(String id) {
             super(id);
 
-            nameHeadingField = new Label("contactNameHeading",nameHeadingModel);
+            nameHeadingField = new Label("contactNameHeading", nameHeadingModel);
             add(nameHeadingField);
 
             nameField = new TextField<String>("contactName", nameModel);
@@ -205,18 +201,18 @@ public class ContactPage extends WebPage {
             addressField.setEnabled(false);
             add(addressField);
 
-            contactError = new Label("contactError",contactErrorModel);
+            contactError = new Label("contactError", contactErrorModel);
             contactError.setVisible(false);
             add(contactError);
 
-            editImage = new EditImageButton("editImg",editModel);
-         //  add(editLink("editLink").add(editImage));
+            editImage = new EditImageButton("editImg", editModel);
+            //  add(editLink("editLink").add(editImage));
             editImage.setDefaultFormProcessing(false);
 
             add(editImage);
             //editImage.add(editLink("edit"));
 
-            deleteImage = new DeleteImageButton("deleteImg",deleteModel);
+            deleteImage = new DeleteImageButton("deleteImg", deleteModel);
             deleteImage.setDefaultFormProcessing(false);
             add(deleteImage);
         }
@@ -224,11 +220,14 @@ public class ContactPage extends WebPage {
         @Override
         public final void onSubmit() {
             LOGGER.info("delete clicked");
-            //super.onSubmit();
+
         }
     }
 
-    public class EditImageButton extends ImageButton{
+    /**
+     * Edit Image button class overrides onSubmit() to perform action when the button is clicked
+     */
+    public class EditImageButton extends ImageButton {
 
         public EditImageButton(String id, IModel<String> model) {
             super(id, model);
@@ -237,7 +236,7 @@ public class ContactPage extends WebPage {
         @Override
         public void onSubmit() {
             LOGGER.info("edit clicked ");
-            if (!save){
+            if (!save) {
                 editModel.setObject(saveRef);
                 contactDetailsForm.add(editImage);
                 nameField.setEnabled(true);
@@ -249,46 +248,43 @@ public class ContactPage extends WebPage {
                 emailField.setEnabled(true);
                 contactDetailsForm.add(emailField);
                 save = true;
-            }else{
-                //nameField.validate();
-                //nameField.updateModel();
-
+            } else {
 
                 String name = nameField.getInput();
                 String email = emailField.getInput();
                 String phone = phoneField.getInput();
                 String address = addressField.getInput();
 
-                LOGGER.info("contactId: "+showContactID+" userID: "+userId+" name: "+nameField.getInput()+" email: "+email+" phone: "+phone+" address: "+address);
-                if (name == null || name.equals("")){
+                LOGGER.info("contactId: " + showContactID + " userID: " + userId + " name: " + nameField.getInput() + " email: " + email + " phone: " + phone + " address: " + address);
+                if (name == null || name.equals("")) {
                     contactError.setVisible(true);
                     contactErrorModel.setObject("Please fill all the fields");
 
                     return;
                 }
-                if (email == null || email.equals("")){
+                if (email == null || email.equals("")) {
                     contactError.setVisible(true);
                     contactErrorModel.setObject("Please fill all the fields");
                     return;
                 }
-                if (phone == null || phone.equals("")){
+                if (phone == null || phone.equals("")) {
                     contactError.setVisible(true);
                     contactErrorModel.setObject("Please fill all the fields");
                     return;
                 }
-                if (address == null || address.equals("")){
+                if (address == null || address.equals("")) {
                     contactError.setVisible(true);
                     contactErrorModel.setObject("Please fill all the fields");
                     return;
                 }
 
-                if (!ValidateString.emailValidate(email)){
+                if (!ValidateString.emailValidate(email)) {
                     contactError.setVisible(true);
                     contactErrorModel.setObject("Please enter valid email");
                     return;
                 }
 
-                if (!ValidateString.phoneValidate(phone)){
+                if (!ValidateString.phoneValidate(phone)) {
                     contactError.setVisible(true);
                     contactErrorModel.setObject("Please enter valid phone number");
                     return;
@@ -305,7 +301,7 @@ public class ContactPage extends WebPage {
                 ContactDataAccess contactDataAccess = new ContactDataAccess();
                 boolean status = contactDataAccess.update(hbContactsEntity);
 
-                if (!status){
+                if (!status) {
                     contactError.setVisible(true);
                     contactErrorModel.setObject("Something went wrong please try again");
                     return;
@@ -330,11 +326,14 @@ public class ContactPage extends WebPage {
             }
 
 
-            //LOGGER.info("edit clicked after");
+
         }
     }
 
-    public class DeleteImageButton extends ImageButton{
+    /**
+     * Delete Image button class overrides onSubmit() to perform action when the button is clicked
+     */
+    public class DeleteImageButton extends ImageButton {
 
         public DeleteImageButton(String id, IModel<String> model) {
             super(id, model);
@@ -343,34 +342,37 @@ public class ContactPage extends WebPage {
         @Override
         public void onSubmit() {
             LOGGER.info("delete clicked ");
-           if (showContactID == -1){
-               nameModel.setObject("");
-               nameField.setEnabled(true);
-               contactDetailsForm.add(nameField);
-               addressModel.setObject("");
-               addressField.setEnabled(true);
-               contactDetailsForm.add(addressField);
-               phoneModel.setObject("");
-               phoneField.setEnabled(true);
-               contactDetailsForm.add(phoneField);
-               emailModel.setObject("");
-               emailField.setEnabled(true);
-               contactDetailsForm.add(emailField);
-           }else{
-               boolean status = HibernateManager.deleteContact(showContactID);
-               if (status) {
-                   setResponsePage(new ContactPage(userId));
-               }else{
-                   contactError.setVisible(true);
-                   contactErrorModel.setObject("Something went wrong please try again");
-                   return;
-               }
-           }
-            //LOGGER.info("edit clicked after");
+            if (showContactID == -1) {
+                nameModel.setObject("");
+                nameField.setEnabled(true);
+                contactDetailsForm.add(nameField);
+                addressModel.setObject("");
+                addressField.setEnabled(true);
+                contactDetailsForm.add(addressField);
+                phoneModel.setObject("");
+                phoneField.setEnabled(true);
+                contactDetailsForm.add(phoneField);
+                emailModel.setObject("");
+                emailField.setEnabled(true);
+                contactDetailsForm.add(emailField);
+            } else {
+                boolean status = HibernateManager.deleteContact(showContactID);
+                if (status) {
+                    setResponsePage(new ContactPage(userId));
+                } else {
+                    contactError.setVisible(true);
+                    contactErrorModel.setObject("Something went wrong please try again");
+                    return;
+                }
+            }
+
         }
     }
 
-    public class AddImageButton extends ImageButton{
+    /**
+     * Add Image button class overrides onSubmit() to perform action when the button is clicked
+     */
+    public class AddImageButton extends ImageButton {
 
         public AddImageButton(String id, IModel<String> model) {
             super(id, model);
@@ -402,7 +404,7 @@ public class ContactPage extends WebPage {
         }
     }
 
-    public class SignOutImageButton extends ImageButton{
+    public class SignOutImageButton extends ImageButton {
 
         public SignOutImageButton(String id, IModel<String> model) {
             super(id, model);
@@ -415,6 +417,9 @@ public class ContactPage extends WebPage {
     }
 
 
+    /**
+     * Class that implements ILinkListener to override onLickClicked() so that the contact display action can be performed
+     */
     public class OnContactClicked implements ILinkListener {
 
         int contactId;
@@ -434,20 +439,20 @@ public class ContactPage extends WebPage {
         @Override
         public void onLinkClicked() {
             contactError.setVisible(false);
-            LOGGER.info("Contact Clicked: "+contactName);
-            nameHeadingModel.setObject(""+contactName);
+            LOGGER.info("Contact Clicked: " + contactName);
+            nameHeadingModel.setObject("" + contactName);
             contactDetailsForm.replace(nameHeadingField);
 
-            nameModel.setObject(""+contactName);
+            nameModel.setObject("" + contactName);
             nameField.setEnabled(false);
             contactDetailsForm.replace(nameField);
-            addressModel.setObject(""+contactAddress);
+            addressModel.setObject("" + contactAddress);
             addressField.setEnabled(false);
-            contactDetailsForm. add(addressField);
-            phoneModel.setObject(""+contactPh);
+            contactDetailsForm.add(addressField);
+            phoneModel.setObject("" + contactPh);
             phoneField.setEnabled(false);
             contactDetailsForm.add(phoneField);
-            emailModel.setObject(""+contactEmail);
+            emailModel.setObject("" + contactEmail);
             emailField.setEnabled(false);
             contactDetailsForm.add(emailField);
             editModel.setObject(editRef);
@@ -457,6 +462,12 @@ public class ContactPage extends WebPage {
         }
     }
 
+    /**
+     * Signout function
+     * @param name - name of the component referenced by wicket:id in html
+     * @return - link equivaled of <a></a> tag in HTML
+     */
+
     public Link<Void> signoutLink(final String name) {
 
         return new Link<Void>(name) {
@@ -465,11 +476,7 @@ public class ContactPage extends WebPage {
              */
             @Override
             public void onClick() {
-//                strMdl.setObject("Username: "+usernameField.getModelObject()+" password: "+passwordField.getModelObject());
-//                homePage.add(errorLabel);
-                // errorLabel = new Label("labelError","user "+usernameField.getValue());
-                //errorLabel
-                //setResponsePage(new RegisterUser());
+
                 LOGGER.info("signout clicked ");
                 getSession().invalidateNow();
                 setResponsePage(HomePage.class);

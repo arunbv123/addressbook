@@ -25,16 +25,27 @@ public class ValidateString {
         phonePattern = Pattern.compile(PHONE_PATTERN);
     }
 
-    public static boolean emailValidate(final String hex) {
 
-        emailMatcher = emailPattern.matcher(hex);
+    /**
+     * Function that validates email address
+     * @param email -  Email string that has to be validated
+     * @return - True if valid email id False if invalid
+     */
+    public static boolean emailValidate(final String email) {
+
+        emailMatcher = emailPattern.matcher(email);
         return emailMatcher.matches();
 
     }
 
-    public static boolean phoneValidate(final String hex) {
+    /**
+     *Function that validates phone number
+     * @param phone - Phone string that has be validated
+     * @return - True if valid phone number id False if invalid
+     */
+    public static boolean phoneValidate(final String phone) {
 
-        phoneMatcher = phonePattern.matcher(hex);
+        phoneMatcher = phonePattern.matcher(phone);
         return phoneMatcher.matches();
 
     }

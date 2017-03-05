@@ -5,6 +5,7 @@ import javax.persistence.GenerationType;
 import java.io.Serializable;
 
 /**
+ * Hibernate Entity for users table in database. This has the information regarding the users for addressbook in the database
  * Created by Arun on 2/28/2017.
  */
 

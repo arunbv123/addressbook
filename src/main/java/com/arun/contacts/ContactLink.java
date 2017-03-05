@@ -8,18 +8,31 @@ import org.apache.wicket.markup.html.panel.Panel;
 
 
 /**
+ * Class that creates individual contact item in the contact list. This also has the link that can be accessed by overriding onClick() in ILinkListener of the constructor
  * Created by Arun on 3/2/2017.
  */
-public class ContactLink extends Panel {
+class ContactLink extends Panel {
 
 
-    public ContactLink(String id,String linkName,
+    /**
+     *
+     * @param id - component id
+     * @param linkName - Name of the contact
+     * @param linkListener - Listener to perform action when the contact is clicked
+     */
+     ContactLink(String id, String linkName,
                        ILinkListener linkListener) {
         super(id);
         setRenderBodyOnly(true);
         add(generateLink(linkListener, linkName));
     }
 
+    /**
+     * Function creates th contact label and link
+     * @param linkListener - contact onClick listener
+     * @param linkName - contact lable name
+     * @return
+     */
     private Link<?> generateLink(final ILinkListener linkListener,
                                  String linkName) {
         Label linkLabel = new Label("linkLabel", linkName);

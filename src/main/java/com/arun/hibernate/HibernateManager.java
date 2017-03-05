@@ -16,6 +16,8 @@ import java.util.List;
 
 /**
  * Created by Arun on 2/28/2017.
+ *
+ * This class manages the data flow between the java classes and Hibernate entity
  */
 public class HibernateManager {
 
@@ -32,6 +34,12 @@ public class HibernateManager {
         return sessionFactory;
     }
 
+    /**
+     * This function is used to get the user data from the sql database.
+     *
+     * @param username - username of the user
+     * @return - returns the Hibernate entity for user that has data from the sql database
+     */
     public static HbUsersEntity getUserByUsername(String username) {
         final Session session = HibernateManager.getSessionFactory().openSession();
         Transaction transaction = null;
@@ -57,12 +65,14 @@ public class HibernateManager {
         } finally {
             session.close();
         }
-
-
-
-
         return user;
     }
+
+    /**
+     * This function gets the list of contacts associated with the user
+     * @param userId - user id of the user
+     * @return - returns list of contacts associated with the user.
+     */
 
 
     public static List<HbContactsEntity> getContactList(int userId) {
@@ -87,6 +97,12 @@ public class HibernateManager {
         return list;
     }
 
+    /**
+     * This function updates the hibernate enity in the database
+     * @param object - The Hibernate entity to be updated in database
+     * @return - True if the update was successful False if unsuccessful
+     */
+
     public static boolean update(Object object) {
 
             final Session session = HibernateManager.getSessionFactory().openSession();
@@ -108,6 +124,12 @@ public class HibernateManager {
                 session.close();
             }
     }
+
+    /**
+     * This function deletes the contact from database
+     * @param id - id of the contact that needs to be deleted
+     * @return - True if the deletion was successful False if unsuccessful
+     */
 
     public static boolean deleteContact(int id)
     {
@@ -132,6 +154,12 @@ public class HibernateManager {
             session.close();
         }
     }
+
+    /**
+     * This function creates the user in database
+     * @param object - Hibernate entity for users with the data to create a new user
+     * @return - True if the deletion was successful False if unsuccessful
+     */
 
     public static boolean createUser (Object object) {
 

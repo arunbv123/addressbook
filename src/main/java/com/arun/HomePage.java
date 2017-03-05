@@ -7,141 +7,59 @@ import com.arun.model.UserDataAccess;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.form.*;
 import org.apache.wicket.markup.html.link.Link;
-import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.WebPage;
 
-import java.util.logging.Logger;
-
 public class HomePage extends WebPage {
 
     private static final org.jboss.logging.Logger LOGGER = org.jboss.logging.Logger.getLogger(HomePage.class);
     private static final long serialVersionUID = 1L;
-    //TextField<String> usernameField;
-    // PasswordTextField passwordField;
-    // Label errorLabel;
-    Model<String> loginErModel = Model.of(" ");
-    Model<String> signInUpLinkModel = Model.of("Sign Up?");
-    Model<String> signInUpButtonModel = Model.of("Sign In");
 
-    SignInForm signInForm;
-//    SignInSession session = getMySession();
-//
-//    /**
-//     * @return Session
-//     */
-//    private SignInSession getMySession() {
-//        return (SignInSession)getSession();
-//    }
+    private Model<String> loginErModel = Model.of(" ");
+    private Model<String> signInUpLinkModel = Model.of("Sign Up?");
+    private Model<String> signInUpButtonModel = Model.of("Sign In");
 
-    HomePage homePage = this;
+    private SignInForm signInForm;
 
-//    TextField<String> usernameField;
-//    PasswordTextField passwordField;
-    PasswordTextField rePasswordField;
-    TextField<String> emailField;
-    //Label errorLabel;
-    TextField<String> usernameField;
-    PasswordTextField passwordField;
-    WebMarkupContainer rePassDiv;
-    WebMarkupContainer emailDiv;
-    Button signInUpButton;
-    Link<String> link;
-    //SignInUpLink signInUpLink;
 
-    Label errorLabel;
-    Label signInUpLinkLabel;
+    //HomePage homePage = this;
 
-    //SignUpForm signUpForm;
 
-    boolean signup = false;
+    private PasswordTextField rePasswordField;
+    private TextField<String> emailField;
+
+    private TextField<String> usernameField;
+    private PasswordTextField passwordField;
+    private WebMarkupContainer rePassDiv;
+    private WebMarkupContainer emailDiv;
+    private Button signInUpButton;
+    private Link<String> link;
+
+
+    private Label errorLabel;
+    private Label signInUpLinkLabel;
+
+
+    private boolean signup = false;
 
     public HomePage(final PageParameters parameters) {
         super(parameters);
-//        usernameField = new TextField<String>("user", Model.of(" "));
-//        usernameField.setRequired(true);
-//        add(usernameField);
-//
-//        passwordField = new PasswordTextField("pass", Model.of(" "));
-//        passwordField.setRequired(true);
-//        add(passwordField);
-//
+
 
         signInForm = new SignInForm("signInForm");
         add(signInForm);
-        //signUpForm = new SignUpForm("signUpForm");
-        //signUpForm.setEnabled(false);
-        //signUpForm.onFormSubmitted(new );
-
-        //add(signUpForm);
-
-//        usernameField = new TextField<String>("signUpUser", Model.of(""));
-//        usernameField.setRequired(true);
-//        add(usernameField);
-//
-//        passwordField = new PasswordTextField("signUpPass", Model.of(""));
-//        passwordField.setRequired(true);
-//        add(passwordField);
 
 
-//        errorLabel = new Label("signUpError", signupErModel);
-//        errorLabel.setOutputMarkupId(true);
-//        add(errorLabel);
-//
-//        Link<String> link = new Link<String>("signUpButton") {
-//            private static final long serialVersionUID = 1L;
-//
-//            @Override
-//            public void onClick() {
-//                LOGGER.info("inside click: ");
-//
-//            }
-//
-//
-//        };
 
-//        link.setOutputMarkupId(true);
-//
-//        add(link);
-
-
-        //Check if there already is a session:
-//        if (session.isSignedIn()) {
-//            // set feedback message and go to HomePage:
-//            getSession().info("Welcome back '"+session.getUser().getUsername()+"'!");
-//            setResponsePage(new HomePage());
-//        }
-
-
-        //add(new Label("version", getApplication().getFrameworkSettings().getVersion()));
-
-        // TODO Add your page's components here
 
     }
 
 
-//    public Link<Void> LoginUserLink(final String name){
-//
-//        return new Link<Void>(name)
-//        {
-//            /**
-//             * @see org.apache.wicket.markup.html.link.Link#onClick()
-//             */
-//            @Override
-//            public void onClick() {
-//                strMdl.setObject("Username: "+usernameField.getModelObject()+" password: "+passwordField.getModelObject());
-//                homePage.add(errorLabel);
-//               // errorLabel = new Label("labelError","user "+usernameField.getValue());
-//                //errorLabel
-//                //setResponsePage(new RegisterUser());
-//            }
-//        };
-//
-//    }
-
-
+    /**
+     * Sign In and Sign Up form
+     */
     public final class SignInForm extends Form<Void> {
 
 
@@ -149,11 +67,11 @@ public class HomePage extends WebPage {
         /**
          * Constructor
          */
-        public SignInForm(final String id) {
+        private SignInForm(final String id) {
 
             super(id);
 
-            usernameField = new TextField<String>("user", Model.of(""));
+            usernameField = new TextField<>("user", Model.of(""));
             usernameField.setRequired(true);
             add(usernameField);
 
@@ -177,7 +95,7 @@ public class HomePage extends WebPage {
             emailDiv.setVisible(false);
             add(emailDiv);
 
-            emailField = new TextField<String>("signUpEmail", Model.of(""));
+            emailField = new TextField<>("signUpEmail", Model.of(""));
             emailField.setRequired(true);
             emailDiv.add(emailField);
 
@@ -185,11 +103,11 @@ public class HomePage extends WebPage {
 
             add(signInUpButton);
             setDefaultButton(signInUpButton);
-            //signInUpLink = new SignInUpLink("signInUpLink",signInUpLinkModel);
+
 
 
            link = new Link<String>("signInUpLink") {
-                //private static final long serialVersionUID = 1L;
+
 
                 @Override
                 public void onClick() {
@@ -234,8 +152,7 @@ public class HomePage extends WebPage {
          */
         @Override
         public final void onSubmit() {
-//           strMdl.setObject("Username: "+usernameField.getModelObject()+" password: "+passwordField.getModelObject());
-//            add(errorLabel);
+
             LOGGER.info("signin submit");
             UserDataAccess userDataAccess = new UserDataAccess();
             if (!signup) {
@@ -257,7 +174,7 @@ public class HomePage extends WebPage {
                     // Get the error message from the properties file associated with the Component
                     loginErModel.setObject("Login failed!");
 
-                    // Register the error message with the feedback panel
+                    // Show the error message
                     add(errorLabel);
                 }
             }else{
@@ -309,57 +226,7 @@ public class HomePage extends WebPage {
 
     }
 
-    public final class SignUpForm extends Form<Void> {
-
-        SubmitLink submitLink;
-        //Button signUp;
-
-        /**
-         * Constructor
-         */
-        public SignUpForm(final String id) {
-
-            super(id);
 
 
-            //signUp.setDefaultFormProcessing(false);
-            //delegateSubmit(signUp);
-
-            // add(signUp);
-
-
-        }
-
-
-    }
-
-//    public class SignInUpLink extends Label implements Link<Void>{
-//
-//        public SignInUpLink(String id, IModel<?> model) {
-//            super(id, model);
-//        }
-//
-//        @Override
-//        public void onClick() {
-//
-//        }
-//    }
-
-    public static Link<Void> SignOutLink(final String name) {
-
-        return new Link<Void>(name) {
-            /**
-             * @see org.apache.wicket.markup.html.link.Link#onClick()
-             */
-            @Override
-            public void onClick() {
-
-
-                // Log out:
-                // getSession().invalidate();
-                // setResponsePage(SignIn.class);
-            }
-        };
-    }
 
 }
