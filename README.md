@@ -1,10 +1,18 @@
 
 
 # Addressbook
+[![N|Solid](https://github.com/arunbv123/images/blob/master/apache-wicket.png)](https://wicket.apache.org/)
+[![N|Solid](https://github.com/arunbv123/images/blob/master/hibernate.png)](http://hibernate.org/)
+[![N|Solid](https://github.com/arunbv123/images/blob/master/mysql2.png)](https://www.mysql.com/)
+[![N|Solid](https://github.com/arunbv123/images/blob/master/wildfly.jpg)](http://wildfly.org/)
+[![N|Solid](https://github.com/arunbv123/images/blob/master/DigitalOcean_logo.png)](https://www.digitalocean.com/)  
+
+
 This repo contains a web application  built using Apache Wicket Framework, Hibernate and mysql. This applicaiton can be deployed on a Wildfly 10 server.
 
 ```
-Server access : [http://107.170.212.195:8080/addressbook](http://107.170.212.195:8080/addressbook)
+This server is hosted on a Digital Ocean Droplet 
+Server access : http://107.170.212.195:8080/addressbook
 MySql server : http://107.170.212.195:3306, Schema: AddressBook
 ```
 
@@ -42,7 +50,4 @@ The application has following functions:
      
 
 
-[![N|Solid](http://svn.apache.org/repos/asf/wicket/sandbox/dashorst/animation/logo-top.png)](https://wicket.apache.org/)
-[![N|Solid](http://www.javatpoint.com/images/hibernate/hibernate2.png)](http://hibernate.org/)
-[![N|Solid](http://www.damnsemicolon.com/wp-content/uploads/2011/04/mysql-database.jpg)](https://www.mysql.com/)
-[![N|Solid](https://www-eapps.r.worldssl.net/images/wildfly-bug.jpg)](http://wildfly.org/)
+
