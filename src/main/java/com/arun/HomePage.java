@@ -153,11 +153,11 @@ public class HomePage extends WebPage {
 
             super(id);
 
-            usernameField = new TextField<String>("user", Model.of(" "));
+            usernameField = new TextField<String>("user", Model.of(""));
             usernameField.setRequired(true);
             add(usernameField);
 
-            passwordField = new PasswordTextField("pass", Model.of(" "));
+            passwordField = new PasswordTextField("pass", Model.of(""));
             passwordField.setRequired(true);
             add(passwordField);
 
@@ -239,6 +239,13 @@ public class HomePage extends WebPage {
             LOGGER.info("signin submit");
             UserDataAccess userDataAccess = new UserDataAccess();
             if (!signup) {
+
+                if (usernameField.getInput().equals("") ||passwordField.getModelObject().equals("")){
+                    loginErModel.setObject("Please fill all the Fields");
+                    add(errorLabel);
+                    return;
+                }
+
                 HbUsersEntity user = userDataAccess.getUserByUsername(usernameField.getModelObject());
                 // Sign the user in
                 if (user != null && user.getUserpass().equals(passwordField.getModelObject())) {
