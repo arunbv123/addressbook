@@ -43,9 +43,17 @@ The application has following functions:
     4. Delete contact: In the contact details page press on the detele button to delete the contact from the user address book.
     
 # Screenshots
+##Sign in:
 ![Image of login](https://github.com/arunbv123/images/blob/master/login.jpg)
-![Image of login](https://github.com/arunbv123/images/blob/master/signup.jpg)
-![Image of login](https://github.com/arunbv123/images/blob/master/contacts.jpg)
+
+##Sign up:
+![Image of signup](https://github.com/arunbv123/images/blob/master/signup.jpg)
+
+##Addressbook view:
+![Image of addressbook](https://github.com/arunbv123/images/blob/master/contacts_new.jpg)
+
+##Addressbook edit+update
+![Image of addressbook edit & update](https://github.com/arunbv123/images/blob/master/contacts_edit.jpg)
      
 
 
