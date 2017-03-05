@@ -140,7 +140,7 @@ public class ContactPage extends WebPage {
 
                 }
 
-                add(namelistItems);
+
             }else{
                 nameHeadingModel.setObject("No Contacts available, Add new contact below");
                 contactDetailsForm.add(nameHeadingField);
@@ -157,6 +157,7 @@ public class ContactPage extends WebPage {
                 save = true;
                 contactFilled = true;
             }
+            add(namelistItems);
 
         }
 

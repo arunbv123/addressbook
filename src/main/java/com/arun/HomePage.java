@@ -264,13 +264,13 @@ public class HomePage extends WebPage {
                     return;
                 }
 
-                if (ValidateString.emailValidate(emailField.getModelObject())){
+                if (!ValidateString.emailValidate(emailField.getModelObject())){
                     loginErModel.setObject("Please enter a valid email");
                     add(errorLabel);
                     return;
                 }
 
-                if (passwordField.getModelObject().equals(rePasswordField.getModelObject())){
+                if (!passwordField.getModelObject().equals(rePasswordField.getModelObject())){
                     loginErModel.setObject("Passwords dont match!");
                     add(errorLabel);
                     return;
@@ -291,6 +291,8 @@ public class HomePage extends WebPage {
                     emailDiv.setVisible(false);
                     rePassDiv.setVisible(false);
                     signup = false;
+                    loginErModel.setObject("Sign Up success, Login now");
+                    add(errorLabel);
                 }else{
                     loginErModel.setObject("Something went wrong , try again");
                     add(errorLabel);
