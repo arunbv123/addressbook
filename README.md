@@ -1,7 +1,4 @@
-[![N|Solid](http://svn.apache.org/repos/asf/wicket/sandbox/dashorst/animation/logo-top.png)](https://wicket.apache.org/)
-[![N|Solid](http://www.javatpoint.com/images/hibernate/hibernate2.png)](http://hibernate.org/)
-[![N|Solid](http://www.damnsemicolon.com/wp-content/uploads/2011/04/mysql-database.jpg)](https://www.mysql.com/)
-[![N|Solid](https://www-eapps.r.worldssl.net/images/wildfly-bug.jpg)](http://wildfly.org/)
+
 
 # Addressbook
 This repo contains a web application  built using Apache Wicket Framework, Hibernate and mysql. This applicaiton can be deployed on a Wildfly 10 server.
@@ -24,3 +21,7 @@ To run the Wicket Address Book, follow these steps:
 ```    
 
 
+[![N|Solid](http://svn.apache.org/repos/asf/wicket/sandbox/dashorst/animation/logo-top.png)](https://wicket.apache.org/)
+[![N|Solid](http://www.javatpoint.com/images/hibernate/hibernate2.png)](http://hibernate.org/)
+[![N|Solid](http://www.damnsemicolon.com/wp-content/uploads/2011/04/mysql-database.jpg)](https://www.mysql.com/)
+[![N|Solid](https://www-eapps.r.worldssl.net/images/wildfly-bug.jpg)](http://wildfly.org/)
