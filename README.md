@@ -27,6 +27,13 @@ The application has following functions:
 - User functions:
      1. User sign in: The user can sign in user test account username: test password: test
      2. User sign up: The user can click on sign up link at the bottom of the page and then fill in the details to sign up. Once sign up is successfull user can sign in with the given username and password.
+     3. User sign out: The user can signout by clicking the right top button in addressbook page.
+ 
+- Address Book functions:
+    1. Add contact: Click on the add button in Addressbook page, fill the details and save the page
+    2. View contact: The contacts related to the user will be listed in the left side of page. Click on the contact and the details will be displayed on the right side.
+    3. Edit contact: In the contact details page can press on edit button to enabled the edit option then click on the save button to save the contact.
+    4. Delete contact: In the contact details page press on the detele button to delete the contact from the user address book.
      
 
 
