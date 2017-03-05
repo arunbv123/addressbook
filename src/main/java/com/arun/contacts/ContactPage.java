@@ -1,5 +1,6 @@
 package com.arun.contacts;
 
+import com.arun.HomePage;
 import com.arun.ValidateString;
 import com.arun.hibernate.HibernateManager;
 import com.arun.model.ContactDataAccess;
@@ -42,6 +43,7 @@ public class ContactPage extends WebPage {
     private PackageResourceReference deleteRef = new PackageResourceReference(ContactPage.class,"delete.png");
     private PackageResourceReference saveRef = new PackageResourceReference(ContactPage.class,"save.png");
     private PackageResourceReference addRef = new PackageResourceReference(ContactPage.class,"add.png");
+    private PackageResourceReference signoutRef = new PackageResourceReference(ContactPage.class,"signout.png");
 
     Model<String> nameModel = Model.of(" ");
     Model<String> addressModel = Model.of(" ");
@@ -52,6 +54,7 @@ public class ContactPage extends WebPage {
     Model editModel = Model.of(editRef);
     Model deleteModel = Model.of(deleteRef);
     Model addModel = Model.of(addRef);
+    Model signoutModel = Model.of(signoutRef);
 
     TextField<String> nameField;
     TextField<String> phoneField;
@@ -61,6 +64,7 @@ public class ContactPage extends WebPage {
     Label contactError;
 
     ImageButton editImage;
+    ImageButton signoutImage;
     ImageButton deleteImage;
     ImageButton addImage;
 
@@ -83,7 +87,13 @@ public class ContactPage extends WebPage {
         add(contactDetailsForm);
         add(new AddressNameListForm("addressNameList", userid));
 
+        Link<Void> signoutLink = signoutLink("signOutLink");
+        signoutImage = new SignOutImageButton("signoutImg",signoutModel);
+        //  add(editLink("editLink").add(editImage));
+        signoutImage.setDefaultFormProcessing(false);
 
+        signoutLink.add(signoutImage);
+        add(signoutLink);
         // create a list with sublists
 //        List<Object> l1 = new ArrayList<>();
 //        l1.add("test 1.1");
@@ -392,6 +402,18 @@ public class ContactPage extends WebPage {
         }
     }
 
+    public class SignOutImageButton extends ImageButton{
+
+        public SignOutImageButton(String id, IModel<String> model) {
+            super(id, model);
+        }
+
+        @Override
+        public void onSubmit() {
+
+        }
+    }
+
 
     public class OnContactClicked implements ILinkListener {
 
@@ -435,7 +457,7 @@ public class ContactPage extends WebPage {
         }
     }
 
-    public Link<Void> editLink(final String name) {
+    public Link<Void> signoutLink(final String name) {
 
         return new Link<Void>(name) {
             /**
@@ -448,7 +470,9 @@ public class ContactPage extends WebPage {
                 // errorLabel = new Label("labelError","user "+usernameField.getValue());
                 //errorLabel
                 //setResponsePage(new RegisterUser());
-                LOGGER.info("EditImage clicked");
+                LOGGER.info("signout clicked ");
+                getSession().invalidateNow();
+                setResponsePage(HomePage.class);
             }
         };
     }

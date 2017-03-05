@@ -22,7 +22,7 @@
             border: 1px solid #9db36a;
         }
 
-        .contact{
+        .contact {
             width: 100%;
             height: 100%;
 
@@ -30,12 +30,11 @@
 
         .labelError {
             color: red;
-            font:600 16px/18px 'Roboto',sans-serif;
-
+            font: 600 16px/18px 'Roboto', sans-serif;
 
         }
 
-        .btImg{
+        .btImg {
             width: 56px;
             height: 56px;
 
@@ -106,6 +105,9 @@
 
             <div class="col-md-12">
                 <!-- BOX -->
+                <div align="right">
+                    <a href="" wicket:id="signOutLink"><input type="image" src="signout.png" name="add" class="btImg"
+                                                              wicket:id="signoutImg"/></a></div>
                 <div class="box border green">
                     <div class="box-title">
                         <h4><i class="fa fa-book"></i>Address Book</h4>
@@ -118,7 +120,8 @@
 
 
                                     <form wicket:id="addressNameList" class="slider-content">
-                                        <input type="image" src="images/add.png" name="add" class="btImg" wicket:id="addImg" />
+                                        <input type="image" src="images/add.png" name="add" class="btImg"
+                                               wicket:id="addImg"/>
                                         <ul>
                                             <li wicket:id="namelistItems"></li>
                                         </ul>
@@ -130,7 +133,8 @@
 
                                 <form wicket:id="contactDetails" class="panel panel-default">
                                     <div class="panel-heading">
-                                        <h2 class="panel-title"><span wicket:id="contactNameHeading">John Doe</span></h2>
+                                        <h2 class="panel-title"><span wicket:id="contactNameHeading">John Doe</span>
+                                        </h2>
                                     </div>
                                     <div class="panel-body">
                                         <div id="card" class="row">
@@ -139,31 +143,39 @@
                                                     <tbody>
                                                     <tr>
                                                         <td><i class="fa fa-font"></i> Name</td>
-                                                        <td id="card-name"><input wicket:id="contactName" class= "contact" type="text" name="fname"></td>
+                                                        <td id="card-name"><input wicket:id="contactName"
+                                                                                  class="contact" type="text"
+                                                                                  name="fname"></td>
                                                     </tr>
                                                     <tr>
                                                         <td><i class="fa fa-home"></i> Address</td>
-                                                        <td><textarea wicket:id="contactAddress" class= "contact" name="Text1" rows="3"></textarea>
+                                                        <td><textarea wicket:id="contactAddress" class="contact"
+                                                                      name="Text1" rows="3"></textarea>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td><i class="fa fa-phone"></i> Phone</td>
-                                                        <td><input wicket:id="contactPhone" class= "contact" type="text" name="phone"></td>
+                                                        <td><input wicket:id="contactPhone" class="contact" type="text"
+                                                                   name="phone"></td>
                                                     </tr>
                                                     <tr>
                                                         <td><i class="fa fa-envelope"></i> Email</td>
-                                                        <td><input wicket:id="contactEmail" class= "contact" type="text" name="email"></td>
+                                                        <td><input wicket:id="contactEmail" class="contact" type="text"
+                                                                   name="email"></td>
                                                     </tr>
 
                                                     </tbody>
                                                 </table>
-                                                <label wicket:id="contactError" class="labelError"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Error</label>
+                                                <label wicket:id="contactError" class="labelError"><i
+                                                        class="fa fa-exclamation-triangle" aria-hidden="true"></i>Error</label>
                                             </div>
                                         </div>
                                         <div align="right">
 
-                                            <input type="image" src="images/edit.png" name="edit" class="btImg" wicket:id="editImg" />
-                                            <input type="image" src="images/delete.png" name="delete" class="btImg" wicket:id="deleteImg" />
+                                            <input type="image" src="images/edit.png" name="edit" class="btImg"
+                                                   wicket:id="editImg"/>
+                                            <input type="image" src="images/delete.png" name="delete" class="btImg"
+                                                   wicket:id="deleteImg"/>
                                         </div>
                                     </div>
                                 </form>
