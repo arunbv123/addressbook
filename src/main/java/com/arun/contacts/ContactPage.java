@@ -38,7 +38,7 @@ public class ContactPage extends WebPage {
     private PackageResourceReference deleteRef = new PackageResourceReference(ContactPage.class, "delete.png");
     private PackageResourceReference saveRef = new PackageResourceReference(ContactPage.class, "save.png");
     private PackageResourceReference addRef = new PackageResourceReference(ContactPage.class, "add.png");
-    private PackageResourceReference signoutRef = new PackageResourceReference(ContactPage.class, "signout.png");
+    private PackageResourceReference signoutRef = new PackageResourceReference(ContactPage.class, "signout_new.jpg");
 
     /**
      * Models for the components in webpage used to dynamically update the component elements example: update text for TextFields and Update images in ImageButton
