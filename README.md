@@ -8,10 +8,9 @@
 [![N|Solid](https://github.com/arunbv123/images/blob/master/DigitalOcean_logo.png)](https://www.digitalocean.com/)  
 
 
-This repo contains a web application  built using Apache Wicket Framework, Hibernate and mysql. This applicaiton can be deployed on a Wildfly 10 server.
+This repo contains a web application  built using Apache Wicket Framework, Hibernate and mysql. This applicaiton can be deployed on a Wildfly 10 server. Applicaiton is deployed on a Digital Ocean Droplet and can be accessed using below link.
 
 ```
-This server is hosted on a Digital Ocean Droplet 
 Server access : http://107.170.212.195:8080/addressbook
 MySql server : http://107.170.212.195:3306, Schema: AddressBook
 ```
