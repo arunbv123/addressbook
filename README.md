@@ -4,7 +4,7 @@
 This repo contains a web application  built using Apache Wicket Framework, Hibernate and mysql. This applicaiton can be deployed on a Wildfly 10 server.
 
 ```
-Server access :http://107.170.212.195:8080/addressbook
+Server access : [http://107.170.212.195:8080/addressbook](http://107.170.212.195:8080/addressbook)
 MySql server : http://107.170.212.195:3306, Schema: AddressBook
 ```
 
